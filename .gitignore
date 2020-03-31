@@ -19,3 +19,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+#设置同步 vscode配置
+# !/.vscode/settings.json

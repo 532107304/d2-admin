@@ -28,7 +28,9 @@ module.exports = {
         // 是否可以使用v-html
         'vue/no-v-html': 0,
         // props是否必须定义类型
-        'vue/require-prop-types': 0
+        'vue/require-prop-types': 0,
+        'singleQuote': true, // 默认单引号，
+        'arenthesis': true, // 为函数名和括号之间加空格
     },
     parserOptions: {
         parser: 'babel-eslint'

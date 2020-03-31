@@ -75,10 +75,10 @@ module.exports = {
     },
     // 默认设置: https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config/base.js
     chainWebpack: config => {
-    /**
-     * 添加 CDN 参数到 htmlWebpackPlugin 配置中
-     * 已适配多页
-     */
+        /**
+         * 添加 CDN 参数到 htmlWebpackPlugin 配置中
+         * 已适配多页
+         */
         const htmlPluginNames = chain(pages).keys().map(page => 'html-' + page).value()
         const targetHtmlPluginNames = htmlPluginNames.length ? htmlPluginNames : ['html']
         each(targetHtmlPluginNames, name => {
@@ -89,11 +89,11 @@ module.exports = {
         })
 
         /**
-     * 删除懒加载模块的 prefetch preload，降低带宽压力
-     * https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch
-     * https://cli.vuejs.org/zh/guide/html-and-static-assets.html#preload
-     * 而且预渲染时生成的 prefetch 标签是 modern 版本的，低版本浏览器是不需要的
-     */
+         * 删除懒加载模块的 prefetch preload，降低带宽压力
+         * https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch
+         * https://cli.vuejs.org/zh/guide/html-and-static-assets.html#preload
+         * 而且预渲染时生成的 prefetch 标签是 modern 版本的，低版本浏览器是不需要的
+         */
         config.plugins
             .delete('prefetch')
             .delete('preload')
@@ -111,11 +111,11 @@ module.exports = {
                 changeSelector: forElementUI.changeSelector
             }])
         config
-        // 开发环境 sourcemap 不包含列信息
+            // 开发环境 sourcemap 不包含列信息
             .when(process.env.NODE_ENV === 'development',
                 config => config.devtool('cheap-source-map')
             )
-        // 预览环境构建 vue-loader 添加 filename
+            // 预览环境构建 vue-loader 添加 filename
             .when(
                 process.env.VUE_APP_SCOURCE_LINK === 'TRUE',
                 config => VueFilenameInjector(config, {
