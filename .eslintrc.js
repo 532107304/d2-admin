@@ -24,7 +24,11 @@ module.exports = {
             },
             "svg": "always",
             "math": "always"
-        }]
+        }],
+        // 是否可以使用v-html
+        'vue/no-v-html': 0,
+        // props是否必须定义类型
+        'vue/require-prop-types': 0
     },
     parserOptions: {
         parser: 'babel-eslint'

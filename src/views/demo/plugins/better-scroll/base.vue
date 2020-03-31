@@ -1,45 +1,56 @@
 <template>
-  <d2-container>
-    <template slot="header">基础用法</template>
-    <div ref="wrapper" class="demo-bs-wrapper">
-      <div>
-        <div v-for="n in 30" :key="n" class="demo-bs-item">n : {{n}}</div>
-      </div>
-    </div>
-  </d2-container>
+    <d2-container>
+        <template slot="header">
+            基础用法
+        </template>
+        <div
+            ref="wrapper"
+            class="demo-bs-wrapper"
+        >
+            <div>
+                <div
+                    v-for="n in 30"
+                    :key="n"
+                    class="demo-bs-item"
+                >
+                    n : {{ n }}
+                </div>
+            </div>
+        </div>
+    </d2-container>
 </template>
 
 <script>
 import BScroll from 'better-scroll'
 export default {
-  data () {
-    return {
-      BS: null
-    }
-  },
-  mounted () {
-    this.scrollInit()
-  },
-  beforeDestroy () {
-    this.scrollDestroy()
-  },
-  methods: {
-    scrollInit () {
-      this.BS = new BScroll(this.$refs.wrapper, {
-        mouseWheel: true,
-        click: true,
-        scrollbar: {
-          fade: true,
-          interactive: false
+    data () {
+        return {
+            BS: null
         }
-      })
     },
-    scrollDestroy () {
-      if (this.BS) {
-        this.BS.destroy()
-      }
+    mounted () {
+        this.scrollInit()
+    },
+    beforeDestroy () {
+        this.scrollDestroy()
+    },
+    methods: {
+        scrollInit () {
+            this.BS = new BScroll(this.$refs.wrapper, {
+                mouseWheel: true,
+                click: true,
+                scrollbar: {
+                    fade: true,
+                    interactive: false
+                }
+            })
+        },
+        scrollDestroy () {
+            if (this.BS) {
+                this.BS.destroy()
+            }
+        }
     }
-  }
 }
 </script>
 

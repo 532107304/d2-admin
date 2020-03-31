@@ -1,31 +1,42 @@
 <template>
-  <div class="d2-container-ghost">
-    <div v-if="$slots.header" class="d2-container-ghost__header" ref="header">
-      <slot name="header"/>
+    <div class="d2-container-ghost">
+        <div
+            v-if="$slots.header"
+            ref="header"
+            class="d2-container-ghost__header"
+        >
+            <slot name="header" />
+        </div>
+        <div
+            ref="body"
+            class="d2-container-ghost__body"
+        >
+            <slot />
+        </div>
+        <div
+            v-if="$slots.footer"
+            ref="footer"
+            class="d2-container-ghost__footer"
+        >
+            <slot name="footer" />
+        </div>
     </div>
-    <div class="d2-container-ghost__body" ref="body">
-      <slot/>
-    </div>
-    <div v-if="$slots.footer" class="d2-container-ghost__footer" ref="footer">
-      <slot name="footer"/>
-    </div>
-  </div>
 </template>
 
 <script>
 import scroll from './mixins/normal'
 export default {
-  name: 'd2-container-ghost',
-  mixins: [
-    scroll
-  ],
-  mounted () {
+    name: 'D2ContainerGhost',
+    mixins: [
+        scroll
+    ],
+    mounted () {
     // 增加滚动事件监听
-    this.addScrollListener()
-  },
-  beforeDestroy () {
+        this.addScrollListener()
+    },
+    beforeDestroy () {
     // 移除滚动事件监听
-    this.removeScrollListener()
-  }
+        this.removeScrollListener()
+    }
 }
 </script>

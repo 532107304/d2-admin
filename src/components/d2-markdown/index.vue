@@ -1,10 +1,16 @@
 <template>
-  <div class="component-markdown">
-    <div class="spin-group" v-if="!markedHTML">
-      <div>正在加载</div>
+    <div class="component-markdown">
+        <div
+            v-if="!markedHTML"
+            class="spin-group"
+        >
+            <div>正在加载</div>
+        </div>
+        <div
+            class="markdown-body"
+            v-html="markedHTML"
+        ></div>
     </div>
-    <div class="markdown-body" v-html="markedHTML"></div>
-  </div>
 </template>
 
 <script>
@@ -14,71 +20,71 @@ import bandupan from './plugin/baidupan'
 import 'github-markdown-css'
 import { ComponentsMarkdownBase } from '@api/components.markdown'
 export default {
-  name: 'd2-markdown',
-  props: {
-    url: {
-      type: String,
-      required: false,
-      default: ''
+    name: 'D2Markdown',
+    props: {
+        url: {
+            type: String,
+            required: false,
+            default: ''
+        },
+        source: {
+            type: String,
+            required: false,
+            default: ''
+        },
+        highlight: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        // 百度网盘分享链接特殊样式
+        baidupan: {
+            type: Boolean,
+            required: false,
+            default: true
+        }
     },
-    source: {
-      type: String,
-      required: false,
-      default: ''
+    data () {
+        return {
+            getReadmePublicPath: '',
+            markedHTML: ''
+        }
     },
-    highlight: {
-      type: Boolean,
-      required: false,
-      default: false
+    mounted () {
+        if (this.url) {
+            this.initWithUrl()
+        } else if (this.source) {
+            this.initWithMd()
+        } else {
+            console.log('not mounted init')
+        }
     },
-    // 百度网盘分享链接特殊样式
-    baidupan: {
-      type: Boolean,
-      required: false,
-      default: true
-    }
-  },
-  data () {
-    return {
-      getReadmePublicPath: '',
-      markedHTML: ''
-    }
-  },
-  mounted () {
-    if (this.url) {
-      this.initWithUrl()
-    } else if (this.source) {
-      this.initWithMd()
-    } else {
-      console.log('not mounted init')
-    }
-  },
-  methods: {
+    methods: {
     // 使用 md 初始化
-    initWithMd () {
-      this.markedHTML = this.marked(this.source)
-    },
-    // 使用 url 初始化
-    async initWithUrl () {
-      this.markedHTML = await this.getReadme(this.url)
-    },
-    // 从 url 加载原始数据
-    async getReadme (url) {
-      const data = await ComponentsMarkdownBase(url)
-      return this.marked(data)
-    },
-    marked (data) {
-      const renderer = new marked.Renderer()
-      renderer.blockquote = (quote) => {
-        // 百度网盘
-        return (this.baidupan && bandupan(quote, this.$baseUrl)) || `<blockquote>${quote}</blockquote>`
-      }
-      return marked(data, {
-        ...this.highlight ? { highlight: (code) => highlight.highlightAuto(code).value } : {},
-        renderer
-      })
+        initWithMd () {
+            this.markedHTML = this.marked(this.source)
+        },
+        // 使用 url 初始化
+        async initWithUrl () {
+            this.markedHTML = await this.getReadme(this.url)
+        },
+        // 从 url 加载原始数据
+        async getReadme (url) {
+            const data = await ComponentsMarkdownBase(url)
+            return this.marked(data)
+        },
+        marked (data) {
+            const renderer = new marked.Renderer()
+            renderer.blockquote = (quote) => {
+                // 百度网盘
+                return (this.baidupan && bandupan(quote, this.$baseUrl)) || `<blockquote>${quote}</blockquote>`
+            }
+            return marked(data, {
+                ...this.highlight ? { highlight: (code) => highlight.highlightAuto(code).value } : {},
+                renderer
+            })
+        }
     }
-  }
 }
 </script>
 

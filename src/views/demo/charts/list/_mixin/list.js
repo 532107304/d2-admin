@@ -3,11 +3,11 @@ import VCharts from 'v-charts'
 Vue.use(VCharts)
 
 export default {
-  data () {
-    return {
-      pubSetting: {
-        height: '100%'
-      }
+    data () {
+        return {
+            pubSetting: {
+                height: '100%'
+            }
+        }
     }
-  }
 }

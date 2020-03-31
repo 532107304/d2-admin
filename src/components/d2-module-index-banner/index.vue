@@ -1,42 +1,51 @@
 <template>
-  <div
-    class="banner"
-    :class="{
-      'with-link': link
-    }"
-    flex="dir:top main:center cross:top">
-    <p class="banner--title">{{title}}</p>
-    <p class="banner--sub-title">{{subTitle}}</p>
-    <p v-if="link" class="banner--link" @click="handleLinkClick">
-      <span class="banner--link-button">
-        <d2-icon name="link"/>
-        {{link}}
-      </span>
-    </p>
-  </div>
+    <div
+        class="banner"
+        :class="{
+            'with-link': link
+        }"
+        flex="dir:top main:center cross:top"
+    >
+        <p class="banner--title">
+            {{ title }}
+        </p>
+        <p class="banner--sub-title">
+            {{ subTitle }}
+        </p>
+        <p
+            v-if="link"
+            class="banner--link"
+            @click="handleLinkClick"
+        >
+            <span class="banner--link-button">
+                <d2-icon name="link" />
+                {{ link }}
+            </span>
+        </p>
+    </div>
 </template>
 
 <script>
 export default {
-  props: {
-    title: {
-      type: String,
-      default: ''
+    props: {
+        title: {
+            type: String,
+            default: ''
+        },
+        subTitle: {
+            type: String,
+            default: ''
+        },
+        link: {
+            type: String,
+            default: ''
+        }
     },
-    subTitle: {
-      type: String,
-      default: ''
-    },
-    link: {
-      type: String,
-      default: ''
+    methods: {
+        handleLinkClick () {
+            this.$open(this.link)
+        }
     }
-  },
-  methods: {
-    handleLinkClick () {
-      this.$open(this.link)
-    }
-  }
 }
 </script>
 

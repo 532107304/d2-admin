@@ -1,23 +1,37 @@
 <template>
-  <d2-container type="card" class="page">
-    <template slot="header">
-      <div class="colorful">{{grayActive ? 'GRAY' : 'COLORFUL'}}</div>
-    </template>
-    <el-button-group>
-      <el-button @click="grayToggle">切换灰度模式</el-button>
-      <el-button @click="graySet(true)">打开灰度模式</el-button>
-      <el-button @click="graySet(false)">关闭灰度模式</el-button>
-      <el-button @click="dialogVisible = true">模拟报错提示框</el-button>
-    </el-button-group>
-    <el-dialog
-      title="错误"
-      :visible.sync="dialogVisible"
-      :append-to-body="true"
-      width="30%"
-      @open="handleDialogOpen"
-      @closed="handleDialogClosed">
-      <div
-        style="
+    <d2-container
+        type="card"
+        class="page"
+    >
+        <template slot="header">
+            <div class="colorful">
+                {{ grayActive ? 'GRAY' : 'COLORFUL' }}
+            </div>
+        </template>
+        <el-button-group>
+            <el-button @click="grayToggle">
+                切换灰度模式
+            </el-button>
+            <el-button @click="graySet(true)">
+                打开灰度模式
+            </el-button>
+            <el-button @click="graySet(false)">
+                关闭灰度模式
+            </el-button>
+            <el-button @click="dialogVisible = true">
+                模拟报错提示框
+            </el-button>
+        </el-button-group>
+        <el-dialog
+            title="错误"
+            :visible.sync="dialogVisible"
+            :append-to-body="true"
+            width="30%"
+            @open="handleDialogOpen"
+            @closed="handleDialogClosed"
+        >
+            <div
+                style="
           text-align: center;
           line-height: 100px;
           color: #FFF;
@@ -26,43 +40,51 @@
           border-radius: 4px;
           background-color: #F56C6C;
           margin: -20px 0px;
-          ">
-        Error
-      </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogVisible = false" style="width: 100%;">
-          我看到后面的内容已经变为灰度模式
-        </el-button>
-      </span>
-    </el-dialog>
-  </d2-container>
+          "
+            >
+                Error
+            </div>
+            <span
+                slot="footer"
+                class="dialog-footer"
+            >
+                <el-button
+                    type="primary"
+                    style="width: 100%;"
+                    @click="dialogVisible = false"
+                >
+                    我看到后面的内容已经变为灰度模式
+                </el-button>
+            </span>
+        </el-dialog>
+    </d2-container>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
 export default {
-  data () {
-    return {
-      dialogVisible: false
-    }
-  },
-  computed: {
-    ...mapState('d2admin/gray', {
-      grayActive: 'active'
-    })
-  },
-  methods: {
-    ...mapMutations('d2admin/gray', {
-      grayToggle: 'toggle',
-      graySet: 'set'
-    }),
-    handleDialogOpen () {
-      this.graySet(true)
+    data () {
+        return {
+            dialogVisible: false
+        }
     },
-    handleDialogClosed () {
-      this.graySet(false)
+    computed: {
+        ...mapState('d2admin/gray', {
+            grayActive: 'active'
+        })
+    },
+    methods: {
+        ...mapMutations('d2admin/gray', {
+            grayToggle: 'toggle',
+            graySet: 'set'
+        }),
+        handleDialogOpen () {
+            this.graySet(true)
+        },
+        handleDialogClosed () {
+            this.graySet(false)
+        }
     }
-  }
 }
 </script>
 

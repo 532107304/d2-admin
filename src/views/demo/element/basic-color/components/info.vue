@@ -1,35 +1,44 @@
 <template>
-  <div class="info" :class="theme">
-    <p class="name">{{name}}</p>
-    <p class="sass">{{sass}}</p>
-    <p class="color">{{color}}</p>
-  </div>
+    <div
+        class="info"
+        :class="theme"
+    >
+        <p class="name">
+            {{ name }}
+        </p>
+        <p class="sass">
+            {{ sass }}
+        </p>
+        <p class="color">
+            {{ color }}
+        </p>
+    </div>
 </template>
 
 <script>
 export default {
-  props: {
-    theme: {
-      type: String,
-      required: false,
-      default: 'light' // dark
-    },
-    name: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    sass: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    color: {
-      type: String,
-      required: false,
-      default: ''
+    props: {
+        theme: {
+            type: String,
+            required: false,
+            default: 'light' // dark
+        },
+        name: {
+            type: String,
+            required: false,
+            default: ''
+        },
+        sass: {
+            type: String,
+            required: false,
+            default: ''
+        },
+        color: {
+            type: String,
+            required: false,
+            default: ''
+        }
     }
-  }
 }
 </script>
 

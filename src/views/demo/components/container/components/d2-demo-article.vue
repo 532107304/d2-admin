@@ -1,38 +1,48 @@
 <template>
-  <div class="d2-demo-article">
-    <div v-if="!long" class="d2-demo-article__control">
-      <el-switch
-        v-model="isLong"
-        active-text="长内容"
-        inactive-text="短内容"/>
+    <div class="d2-demo-article">
+        <div
+            v-if="!long"
+            class="d2-demo-article__control"
+        >
+            <el-switch
+                v-model="isLong"
+                active-text="长内容"
+                inactive-text="短内容"
+            />
+        </div>
+        <d2-markdown
+            v-show="isLong"
+            :source="sourceLong"
+        />
+        <d2-markdown
+            v-show="!isLong"
+            :source="sourceShort"
+        />
     </div>
-    <d2-markdown v-show="isLong" :source="sourceLong"/>
-    <d2-markdown v-show="!isLong" :source="sourceShort"/>
-  </div>
 </template>
 
 <script>
 import sourceLong from '../md/long.md'
 import sourceShort from '../md/short.md'
 export default {
-  props: {
+    props: {
     // 指定为长文本
-    long: {
-      type: Boolean,
-      required: false,
-      default: false
+        long: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
+    },
+    data () {
+        return {
+            sourceLong,
+            sourceShort,
+            isLong: false
+        }
+    },
+    created () {
+        this.isLong = this.long
     }
-  },
-  data () {
-    return {
-      sourceLong,
-      sourceShort,
-      isLong: false
-    }
-  },
-  created () {
-    this.isLong = this.long
-  }
 }
 </script>
 

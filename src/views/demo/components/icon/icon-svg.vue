@@ -1,24 +1,34 @@
 <template>
-  <d2-container>
-    <template slot="header">SVG图标组件</template>
-    <el-row>
-      <el-col class="icon-card" :span="4" v-for="(icon, index) in $IconSvg" :key="index">
-        <d2-icon-svg class="icon" :name="icon"/>
-        <div class="icon-title">
-          <span>{{icon}}</span>
-        </div>
-      </el-col>
-    </el-row>
-  </d2-container>
+    <d2-container>
+        <template slot="header">
+            SVG图标组件
+        </template>
+        <el-row>
+            <el-col
+                v-for="(icon, index) in $IconSvg"
+                :key="index"
+                class="icon-card"
+                :span="4"
+            >
+                <d2-icon-svg
+                    class="icon"
+                    :name="icon"
+                />
+                <div class="icon-title">
+                    <span>{{ icon }}</span>
+                </div>
+            </el-col>
+        </el-row>
+    </d2-container>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      filename: __filename
+    data () {
+        return {
+            filename: __filename
+        }
     }
-  }
 }
 </script>
 

@@ -1,102 +1,102 @@
 <template>
-  <span></span>
+    <span></span>
 </template>
 
 <script>
 // https://github.com/inorganik/CountUp.js
 import { CountUp } from 'countup.js'
 export default {
-  name: 'd2-count-up',
-  props: {
-    start: {
-      type: Number,
-      required: false,
-      default: 0
+    name: 'D2CountUp',
+    props: {
+        start: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        end: {
+            type: Number,
+            required: true
+        },
+        decimals: {
+            type: Number,
+            required: false,
+            default: 0
+        },
+        duration: {
+            type: Number,
+            required: false,
+            default: 2
+        },
+        options: {
+            type: Object,
+            required: false,
+            default () {
+                return {}
+            }
+        },
+        callback: {
+            type: Function,
+            required: false,
+            default: () => {}
+        }
     },
-    end: {
-      type: Number,
-      required: true
+    data () {
+        return {
+            c: null
+        }
     },
-    decimals: {
-      type: Number,
-      required: false,
-      default: 0
+    watch: {
+        end (value) {
+            if (this.c && this.c.update) {
+                this.c.update(value)
+            }
+        }
     },
-    duration: {
-      type: Number,
-      required: false,
-      default: 2
+    mounted () {
+        this.init()
     },
-    options: {
-      type: Object,
-      required: false,
-      default () {
-        return {}
-      }
+    beforeDestroy () {
+        this.destroy()
     },
-    callback: {
-      type: Function,
-      required: false,
-      default: () => {}
-    }
-  },
-  data () {
-    return {
-      c: null
-    }
-  },
-  watch: {
-    end (value) {
-      if (this.c && this.c.update) {
-        this.c.update(value)
-      }
-    }
-  },
-  mounted () {
-    this.init()
-  },
-  methods: {
-    init () {
-      if (!this.c) {
-        this.c = new CountUp(this.$el, this.end, {
-          startVal: this.start,
-          decimalPlaces: this.decimals,
-          duration: this.duration,
-          ...this.options
-        })
-        this.c.start(() => {
-          this.callback(this.c)
-        })
-      }
+    methods: {
+        init () {
+            if (!this.c) {
+                this.c = new CountUp(this.$el, this.end, {
+                    startVal: this.start,
+                    decimalPlaces: this.decimals,
+                    duration: this.duration,
+                    ...this.options
+                })
+                this.c.start(() => {
+                    this.callback(this.c)
+                })
+            }
+        },
+        destroy () {
+            this.c = null
+        }
     },
-    destroy () {
-      this.c = null
+    start (callback) {
+        if (this.c && this.c.start) {
+            this.c.start(() => {
+                callback && callback(this.c)
+            })
+        }
+    },
+    pauseResume () {
+        if (this.c && this.c.pauseResume) {
+            this.c.pauseResume()
+        }
+    },
+    reset () {
+        if (this.c && this.c.reset) {
+            this.c.reset()
+        }
+    },
+    update (newEndVal) {
+        if (this.c && this.c.update) {
+            this.c.update(newEndVal)
+        }
     }
-  },
-  beforeDestroy () {
-    this.destroy()
-  },
-  start (callback) {
-    if (this.c && this.c.start) {
-      this.c.start(() => {
-        callback && callback(this.c)
-      })
-    }
-  },
-  pauseResume () {
-    if (this.c && this.c.pauseResume) {
-      this.c.pauseResume()
-    }
-  },
-  reset () {
-    if (this.c && this.c.reset) {
-      this.c.reset()
-    }
-  },
-  update (newEndVal) {
-    if (this.c && this.c.update) {
-      this.c.update(newEndVal)
-    }
-  }
 }
 </script>

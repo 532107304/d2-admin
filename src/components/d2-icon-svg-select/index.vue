@@ -8,10 +8,10 @@
             trigger="click"
         >
             <el-row
+                v-if="clearable"
                 type="flex"
                 justify="end"
                 class="d2-mb-10"
-                v-if="clearable"
             >
                 <el-button
                     type="danger"
@@ -59,16 +59,16 @@
                 />
             </template>
             <el-button
-                v-popover:pop
                 slot="append"
+                v-popover:pop
             >
                 <i class="fa fa-list"></i>
             </el-button>
         </el-input>
         <!-- 不允许用户输入 -->
         <el-button
-            v-popover:pop
             v-if="!userInput"
+            v-popover:pop
         >
             <span flex="dir:left main:center cross:center">
                 <d2-icon-svg
@@ -76,7 +76,7 @@
                     class="d2-icon-svg-select--input-preview d2-mr-10"
                     :name="value"
                 />
-                <span>{{value ? value : placeholder}}</span>
+                <span>{{ value ? value : placeholder }}</span>
             </span>
         </el-button>
     </span>
@@ -84,25 +84,25 @@
 
 <script>
 export default {
-    name: "d2-icon-svg-select",
+    name: 'D2IconSvgSelect',
     props: {
         // 值
         value: {
             type: String,
             required: false,
-            default: ""
+            default: ''
         },
         // 占位符
         placeholder: {
             type: String,
             required: false,
-            default: "请选择"
+            default: '请选择'
         },
         // 弹出界面的方向
         placement: {
             type: String,
             required: false,
-            default: "right"
+            default: 'right'
         },
         // 是否可清空
         clearable: {
@@ -123,53 +123,53 @@ export default {
             default: true
         }
     },
-    data() {
+    data () {
         return {
             // 绑定弹出框
             pop: false,
             // 组件内输入框的值
-            currentValue: "",
+            currentValue: '',
             // 搜索的文字
-            searchText: ""
-        };
+            searchText: ''
+        }
     },
     computed: {
         // 输入框上绑定的设置
-        bind() {
+        bind () {
             return {
                 placeholder: this.placeholder,
                 clearable: this.clearable,
                 ...this.$attrs
-            };
+            }
         },
         // 是否在搜索
-        searchMode() {
-            return !!this.searchText;
+        searchMode () {
+            return !!this.searchText
         },
         // 过滤后的图标
-        iconFilted() {
+        iconFilted () {
             return this.$IconSvg.filter(
                 icon => icon.indexOf(this.searchText) >= 0
-            );
+            )
         }
     },
     watch: {
-        value(value) {
-            this.currentValue = value;
+        value (value) {
+            this.currentValue = value
         }
     },
-    created() {
-        this.currentValue = this.value;
+    created () {
+        this.currentValue = this.value
     },
     methods: {
-        selectIcon(iconName = "") {
-            this.$emit("input", iconName);
+        selectIcon (iconName = '') {
+            this.$emit('input', iconName)
             if (iconName && this.autoClose) {
-                this.pop = false;
+                this.pop = false
             }
         }
     }
-};
+}
 </script>
 
 <style lang="scss" scoped>

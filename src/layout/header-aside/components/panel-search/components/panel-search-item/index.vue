@@ -1,36 +1,69 @@
 <template>
-  <div class="d2-panel-search-item" :class="hoverMode ? 'can-hover' : ''" flex>
-    <div class="d2-panel-search-item__icon" flex-box="0">
-      <div class="d2-panel-search-item__icon-box" flex="main:center cross:center">
-        <d2-icon v-if="item.icon" :name="item.icon"/>
-        <d2-icon-svg v-else-if="item.iconSvg" :name="item.iconSvg"/>
-        <d2-icon v-else name="file-o"/>
-      </div>
+    <div
+        class="d2-panel-search-item"
+        :class="hoverMode ? 'can-hover' : ''"
+        flex
+    >
+        <div
+            class="d2-panel-search-item__icon"
+            flex-box="0"
+        >
+            <div
+                class="d2-panel-search-item__icon-box"
+                flex="main:center cross:center"
+            >
+                <d2-icon
+                    v-if="item.icon"
+                    :name="item.icon"
+                />
+                <d2-icon-svg
+                    v-else-if="item.iconSvg"
+                    :name="item.iconSvg"
+                />
+                <d2-icon
+                    v-else
+                    name="file-o"
+                />
+            </div>
+        </div>
+        <div
+            class="d2-panel-search-item__info"
+            flex-box="1"
+            flex="dir:top"
+        >
+            <div
+                class="d2-panel-search-item__info-title"
+                flex-box="1"
+                flex="cross:center"
+            >
+                <span>{{ item.title }}</span>
+            </div>
+            <div
+                class="d2-panel-search-item__info-fullTitle"
+                flex-box="0"
+            >
+                <span>{{ item.fullTitle }}</span>
+            </div>
+            <div
+                class="d2-panel-search-item__info-path"
+                flex-box="0"
+            >
+                <span>{{ item.path }}</span>
+            </div>
+        </div>
     </div>
-    <div class="d2-panel-search-item__info" flex-box="1" flex="dir:top">
-      <div class="d2-panel-search-item__info-title" flex-box="1" flex="cross:center">
-        <span>{{item.title}}</span>
-      </div>
-      <div class="d2-panel-search-item__info-fullTitle" flex-box="0">
-        <span>{{item.fullTitle}}</span>
-      </div>
-      <div class="d2-panel-search-item__info-path" flex-box="0">
-        <span>{{item.path}}</span>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-  props: {
-    item: {
-      default: () => ({})
-    },
-    hoverMode: {
-      default: false
+    props: {
+        item: {
+            default: () => ({})
+        },
+        hoverMode: {
+            default: false
+        }
     }
-  }
 }
 </script>
 

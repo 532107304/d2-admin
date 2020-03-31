@@ -1,27 +1,27 @@
 <template>
-  <el-button
-    class="d2-module-index-menu-item"
-    @click="handleMenuSelect(menu.path)">
-    {{menu.title}}
-  </el-button>
+    <el-button
+        class="d2-module-index-menu-item"
+        @click="handleMenuSelect(menu.path)"
+    >
+        {{ menu.title }}
+    </el-button>
 </template>
 
 <script>
 import mixinMenu from '@/layout/header-aside/components/mixin/menu'
 export default {
-  mixins: [
-    mixinMenu
-  ],
-  props: {
-    menu: {
-      default: () => ({})
+    mixins: [mixinMenu],
+    props: {
+        menu: {
+            type: [Object],
+            default: () => ({})
+        }
     }
-  }
 }
 </script>
 
 <style lang="scss">
 .d2-module-index-menu-item {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 </style>

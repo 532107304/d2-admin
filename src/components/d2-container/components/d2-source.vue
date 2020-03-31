@@ -1,47 +1,48 @@
 <template>
-  <div
-    v-if="show"
-    class="d2-source"
-    :class="{ 'd2-source--active': isActive }"
-    @click="handleClick">
-    <d2-icon name="code"/> 本页源码
-  </div>
+    <div
+        v-if="show"
+        class="d2-source"
+        :class="{ 'd2-source--active': isActive }"
+        @click="handleClick"
+    >
+        <d2-icon name="code" /> 本页源码
+    </div>
 </template>
 
 <script>
 import { last, get } from 'lodash'
 export default {
-  data () {
-    return {
-      isActive: false,
-      path: ''
-    }
-  },
-  computed: {
-    show () {
-      return process.env.VUE_APP_SCOURCE_LINK === 'TRUE'
-    }
-  },
-  watch: {
-    $route: {
-      handler (to) {
-        this.path = get(last(to.matched), 'components.default.__source')
-      },
-      immediate: true
-    }
-  },
-  mounted () {
+    data () {
+        return {
+            isActive: false,
+            path: ''
+        }
+    },
+    computed: {
+        show () {
+            return process.env.VUE_APP_SCOURCE_LINK === 'TRUE'
+        }
+    },
+    watch: {
+        $route: {
+            handler (to) {
+                this.path = get(last(to.matched), 'components.default.__source')
+            },
+            immediate: true
+        }
+    },
+    mounted () {
     // 一秒后显示按钮
-    setTimeout(() => {
-      this.isActive = true
-    }, 500)
-  },
-  methods: {
+        setTimeout(() => {
+            this.isActive = true
+        }, 500)
+    },
+    methods: {
     // 点击按钮的时候跳转到源代码
-    handleClick () {
-      this.$open(`${process.env.VUE_APP_REPO}/blob/master/${this.path}`)
+        handleClick () {
+            this.$open(`${process.env.VUE_APP_REPO}/blob/master/${this.path}`)
+        }
     }
-  }
 }
 </script>
 

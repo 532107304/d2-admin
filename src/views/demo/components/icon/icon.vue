@@ -1,20 +1,32 @@
 <template>
-  <d2-container>
-    <template slot="header">图标组件</template>
-    <d2-icon class="d2-mr-10"/>
-    <d2-icon name="github" class="d2-mr-10"/>
-    <d2-icon name="github" style="font-size: 100px;" class="d2-mr-10"/>
-    <d2-icon name="github" class="icon-demo"/>
-  </d2-container>
+    <d2-container>
+        <template slot="header">
+            图标组件
+        </template>
+        <d2-icon class="d2-mr-10" />
+        <d2-icon
+            name="github"
+            class="d2-mr-10"
+        />
+        <d2-icon
+            name="github"
+            style="font-size: 100px;"
+            class="d2-mr-10"
+        />
+        <d2-icon
+            name="github"
+            class="icon-demo"
+        />
+    </d2-container>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      filename: __filename
+    data () {
+        return {
+            filename: __filename
+        }
     }
-  }
 }
 </script>
 
