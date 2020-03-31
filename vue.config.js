@@ -3,7 +3,12 @@ const VueFilenameInjector = require('@d2-projects/vue-filename-injector')
 const ThemeColorReplacer = require('webpack-theme-color-replacer')
 const forElementUI = require('webpack-theme-color-replacer/forElementUI')
 const cdnDependencies = require('./dependencies-cdn')
-const { chain, set, each, keys } = require('lodash')
+const {
+  chain,
+  set,
+  each,
+  keys
+} = require('lodash')
 
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
@@ -17,7 +22,9 @@ let publicPath = process.env.VUE_APP_PUBLIC_PATH || '/'
 
 // 设置不参与构建的库
 let externals = {}
-cdnDependencies.forEach(pkg => { externals[pkg.name] = pkg.library })
+cdnDependencies.forEach(pkg => {
+  externals[pkg.name] = pkg.library
+})
 
 // 引入文件的 cdn 链接
 const cdn = {
@@ -100,7 +107,7 @@ module.exports = {
         matchColors: [
           ...forElementUI.getElementUISeries(process.env.VUE_APP_ELEMENT_COLOR) // Element-ui主色系列
         ],
-        externalCssFiles: [ './node_modules/element-ui/lib/theme-chalk/index.css' ], // optional, String or string array. Set external css files (such as cdn css) to extract colors.
+        externalCssFiles: ['./node_modules/element-ui/lib/theme-chalk/index.css'], // optional, String or string array. Set external css files (such as cdn css) to extract colors.
         changeSelector: forElementUI.changeSelector
       }])
     config
